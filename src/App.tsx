@@ -3,8 +3,14 @@ import Ball from './components/Ball/Ball';
 import {useState} from "react";
 
 const App = () => {
-  const [numbers] = useState([5, 11, 16, 23, 32]);
+  const [numbers, setNumbers] = useState([5, 11, 16, 23, 32]);
 
+  const changeNumbersArray =() => {
+    const allNumbers = Array.from({ length: 32 }, (_, i) => i + 5);
+    const mixedNumbers = allNumbers.sort(() => 0.5 - Math.random());
+    const newNumbers = mixedNumbers.slice(0, 5).sort((a, b) => a - b);
+    setNumbers(newNumbers);
+  };
 
   return (
       <>
@@ -13,7 +19,7 @@ const App = () => {
               <Ball key={index} number={number}/>
           ))}
         </div>
-        <button className="numbers-button" >
+        <button className="numbers-button" onClick={changeNumbersArray}>
           New numbers
         </button>
       </>
